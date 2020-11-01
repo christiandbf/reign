@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -11,12 +12,11 @@ export const Title = styled.h1`
     margin: 0;
 `;
 
-export const Header = () =>
-    <Container>
-        <header>
-            <Title>HN Feed</Title>
-            <p>We &lt;3 hacker news!</p>
-        </header>
-    </Container>
-
-export default Header;
+export const Header = () => (
+  <Container>
+    <header>
+      <Title>HN Feed</Title>
+      <p>We &lt;3 hacker news!</p>
+    </header>
+  </Container>
+);

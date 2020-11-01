@@ -1,33 +1,13 @@
+const { REACT_APP_API_URL } = process.env;
+
 export const getPosts = async () => {
-    return Promise.resolve([
-        {
-            url: 'https://www.google.com',
-            title: 'A title',
-            storyTitle: 'A story title',
-            author: 'Christian Barrios',
-            date: '2020-10-30T17:00:01.370Z',
-            id: 1
-        },
-        {
-            url: 'https://www.google.com',
-            title: null,
-            storyTitle: 'A story title',
-            author: 'Christian Barrios',
-            date: '2020-10-29T21:00:01.370Z',
-            id: 2
-        },
-        {
-            url: 'https://www.google.com',
-            title: '',
-            storyTitle: 'A story title 3',
-            author: 'Christian Barrios',
-            date: '2020-10-28T21:00:01.370Z',
-            id: 3
-        }
-    ]);
+  const uri = `${REACT_APP_API_URL}/post`;
+  const response = await fetch(uri);
+  return response.json();
 };
 
-export const deletePost = async id => {
-    console.log(id);
-    await Promise.resolve();
+export const deletePost = async (id) => {
+  const uri = `${REACT_APP_API_URL}/post/${id}`;
+  const response = await fetch(uri, { method: 'DELETE' });
+  return response.json();
 };
