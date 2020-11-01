@@ -1,10 +1,13 @@
-import { HttpService, Injectable } from '@nestjs/common';
+import { HttpService, Injectable, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Post } from './interfaces/post.interface';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class PostService {
+    private readonly logger = new Logger(PostService.name);
+
     constructor(
         @InjectModel('Post') private readonly postModel: Model<Post>,
         private readonly httpService: HttpService
@@ -26,7 +29,9 @@ export class PostService {
         return postDeleted;
     }
 
+    @Cron(CronExpression.EVERY_HOUR)
     async populatePosts(): Promise<void> {
+        this.logger.log('Adding posts to database');
         const response = await this.httpService.get('http://hn.algolia.com/api/v1/search_by_date?query=nodejs')
             .toPromise();
         const { hits } = response.data;
