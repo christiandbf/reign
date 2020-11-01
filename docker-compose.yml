@@ -1,8 +1,36 @@
+# Docker and testing
 version: "3"
 
 services:
+  back-end:
+    build: ./back-end
+    container_name: back-end
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    links:
+      - mongo
+      - redis
+    depends_on:
+      - mongo
+      - redis
+  front-end:
+    build: ./front-end
+    container_name: front-end
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    depends_on:
+      - back-end
   mongo:
     image: mongo:4.2.3-bionic
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - "27017:27017"
+  redis:
+    container_name: redis
+    image: redis:5.0.9-alpine3.11
+    restart: unless-stopped
+    command: redis-server --requirepass password
+    ports:
+      - "6379:6379"

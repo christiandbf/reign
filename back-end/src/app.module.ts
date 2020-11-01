@@ -6,7 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/posts', {
+    MongooseModule.forRoot('mongodb://mongo/posts', {
       useNewUrlParser: true,
       useFindAndModify: false
     }),
