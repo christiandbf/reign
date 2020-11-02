@@ -2,7 +2,7 @@ import { Controller, Delete, Get, Logger, Param, Post } from '@nestjs/common';
 import { Post as PostInterface } from './interfaces/post.interface';
 import { PostService } from './post.service';
 
-@Controller('post')
+@Controller('posts')
 export class PostController {
     private readonly logger = new Logger(PostController.name);
 

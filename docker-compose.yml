@@ -1,4 +1,3 @@
-# Docker and testing
 version: "3"
 
 services:
@@ -25,3 +24,5 @@ services:
     restart: unless-stopped
     ports:
       - "27017:27017"
+    volumes:
+      - ./db:/data/db
